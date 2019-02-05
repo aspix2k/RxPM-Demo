@@ -31,12 +31,12 @@ class TextSearchFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onBindPresentationModel()
     }
 
-    fun onBindPresentationModel() {
+    private fun onBindPresentationModel() {
 
         // --- States ---
         pm.foundWordState
@@ -78,13 +78,9 @@ class TextSearchFragment : Fragment() {
         //------------------
     }
 
-    fun onUnbindPresentationModel() {
-        composite.clear()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
-        onUnbindPresentationModel()
+        composite.clear()
     }
 
     override fun onDestroy() {

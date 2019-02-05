@@ -38,7 +38,7 @@ class TextSearchPresentationModel {
 
     // ---------------
 
-    private var disposable: Disposable? = null
+    private lateinit var disposable: Disposable
 
     fun onCreate() {
 
@@ -53,7 +53,7 @@ class TextSearchPresentationModel {
         disposable = requestByClick
                 .filter { !isLoading() }
                 .doOnNext { showProgress() }
-                .delay(3, TimeUnit.SECONDS) // делаем задержку чтобу увидеть прогресс
+                .delay(1, TimeUnit.SECONDS) // делаем задержку чтобу увидеть прогресс
                 .flatMap { interactor.findWords(it).toObservable() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnEach { hideProgress() }
@@ -61,7 +61,7 @@ class TextSearchPresentationModel {
     }
 
     fun onDestroy() {
-        disposable?.dispose()
+        disposable.dispose()
     }
 
     private fun isLoading() = loading.value
